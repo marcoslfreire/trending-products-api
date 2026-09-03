@@ -14,6 +14,7 @@ banco relacional) e, na segunda etapa, uma automação Selenium sobre esse siste
 - **SmallRye JWT** (autenticação/autorização)
 - **Kotlin** (módulo utilitário, interoperando com o código Java)
 - **JUnit 5** + **RestAssured** (testes unitários e de integração)
+- **Micrometer + Prometheus + Grafana** (observabilidade — requests/sec, latência, erros 4xx/5xx, JVM, CPU)
 
 ## Por que Quarkus?
 
@@ -48,6 +49,7 @@ src/main/java/com/praticando/backend/
 - [x] Setup do projeto Quarkus (Java 21, extensões REST/Panache/MySQL/JWT/Kotlin)
 - [ ] Entidade `User` + hash de senha (BCrypt)
 - [ ] `AuthResource` — registro e login emitindo JWT
+- [x] Observabilidade — Micrometer + Prometheus + Grafana via Docker Compose (métricas HTTP, JVM, CPU, dashboard)
 - [ ] Entidade `Product` + `search_count` (ranking de mais procurados)
 - [ ] `ProductResource` — `/products/top`, `/products/search`, `POST /products` (protegido)
 - [ ] Endpoint assíncrono com Virtual Threads
