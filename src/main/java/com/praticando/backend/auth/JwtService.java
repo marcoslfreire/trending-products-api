@@ -1,6 +1,6 @@
 package com.praticando.backend.auth;
 
-import com.praticando.backend.auth.dto.TokenResponse;
+import com.praticando.backend.dto.TokenResponse;
 
 
 public interface JwtService {

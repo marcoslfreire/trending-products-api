@@ -1,7 +1,7 @@
 package com.praticando.backend.auth;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import com.praticando.backend.auth.dto.TokenResponse;
+import com.praticando.backend.dto.TokenResponse;
 import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
 

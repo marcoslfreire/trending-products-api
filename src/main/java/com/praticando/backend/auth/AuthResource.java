@@ -1,7 +1,7 @@
 package com.praticando.backend.auth;
 
-import com.praticando.backend.auth.dto.AuthRequest;
-import com.praticando.backend.auth.dto.TokenResponse;
+import com.praticando.backend.dto.AuthRequest;
+import com.praticando.backend.dto.TokenResponse;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
