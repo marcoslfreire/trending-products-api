@@ -1,6 +1,6 @@
-package com.praticando.backend.product.dto;
+package com.praticando.backend.dto;
 
-import com.praticando.backend.product.Product;
+import com.praticando.backend.Product;
 
 import java.math.BigDecimal;
 

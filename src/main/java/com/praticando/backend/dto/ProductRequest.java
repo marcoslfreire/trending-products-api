@@ -1,4 +1,4 @@
-package com.praticando.backend.product.dto;
+package com.praticando.backend.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;

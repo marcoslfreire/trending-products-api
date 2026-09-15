@@ -1,4 +1,4 @@
-package com.praticando.backend.product;
+package com.praticando.backend;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

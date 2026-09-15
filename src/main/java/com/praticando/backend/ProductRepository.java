@@ -1,4 +1,4 @@
-package com.praticando.backend.product;
+package com.praticando.backend;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -1,7 +1,7 @@
-package com.praticando.backend.product;
+package com.praticando.backend;
 
-import com.praticando.backend.product.dto.ProductRequest;
-import com.praticando.backend.product.dto.ProductResponse;
+import com.praticando.backend.dto.ProductRequest;
+import com.praticando.backend.dto.ProductResponse;
 //import io.quarkus.virtual.threads.RunOnVirtualThread;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.annotation.security.PermitAll;
