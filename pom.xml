@@ -71,11 +71,6 @@
             <artifactId>quarkus-elytron-security-common</artifactId>
         </dependency>
 
-        <!-- Virtual Threads -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-virtual-threads</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -106,6 +101,11 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-virtual-threads</artifactId>
         </dependency>
 
     </dependencies>

@@ -2,6 +2,8 @@ package com.praticando.backend.product;
 
 import com.praticando.backend.product.dto.ProductRequest;
 import com.praticando.backend.product.dto.ProductResponse;
+//import io.quarkus.virtual.threads.RunOnVirtualThread;
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -32,6 +34,7 @@ public class ProductResource {
     @GET
     @Path("/search")
     @PermitAll
+    @RunOnVirtualThread
     public List<ProductResponse> search(@QueryParam("q") String term) {
         if (term == null || term.isBlank()) {
             return List.of();
