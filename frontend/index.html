@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trending Products — Painel</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+    <strong>Trending Products</strong>
+    <nav>
+        <a href="publish.html">Criar publicação</a>
+        <a href="#" id="logoutLink">Sair</a>
+    </nav>
+</header>
+
+<main>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Pesquisar produto pelo nome ou descrição..." />
+        <button id="searchBtn">Pesquisar</button>
+    </div>
+    <div class="form-group" style="margin-top:-12px;">
+        <label style="display:flex; align-items:center; gap:6px; font-weight:400;">
+            <input type="checkbox" id="allProductsCheckbox" style="width:auto;" />
+            Buscar todos os produtos cadastrados
+        </label>
+    </div>
+
+    <div id="message"></div>
+
+    <h2 id="resultsTitle">Pesquise algo, ou marque "todos os produtos"</h2>
+    <div id="results"></div>
+</main>
+
+<script src="js/app.js"></script>
+<script>
+    // Guard de rota: sem login, não fica aqui.
+    if (!Auth.isLogged()) {
+        window.location.href = "login.html";
+    }
+
+    const resultsEl = document.getElementById("results");
+    const resultsTitle = document.getElementById("resultsTitle");
+    const messageEl = document.getElementById("message");
+    const checkbox = document.getElementById("allProductsCheckbox");
+    const searchInput = document.getElementById("searchInput");
+
+    function showError(msg) {
+        messageEl.innerHTML = `<div class="message error">${msg}</div>`;
+    }
+
+    function renderProducts(products) {
+        resultsEl.innerHTML = products.length
+            ? products.map(productCardHtml).join("")
+            : `<p>Nenhum produto encontrado.</p>`;
+    }
+
+    // Marcar o checkbox desabilita a busca por termo — são modos mutuamente exclusivos.
+    checkbox.addEventListener("change", () => {
+        searchInput.disabled = checkbox.checked;
+        if (checkbox.checked) searchInput.value = "";
+    });
+
+    async function doSearch() {
+        messageEl.innerHTML = "";
+        try {
+            if (checkbox.checked) {
+                resultsTitle.textContent = "Todos os produtos cadastrados";
+                const products = await Api.listAll();
+                renderProducts(products);
+                return;
+            }
+
+            const term = searchInput.value.trim();
+            if (!term) {
+                resultsTitle.textContent = 'Pesquise algo, ou marque "todos os produtos"';
+                resultsEl.innerHTML = "";
+                return;
+            }
+            resultsTitle.textContent = `Resultados para "${term}"`;
+            const products = await Api.searchProducts(term);
+            renderProducts(products);
+        } catch (e) {
+            showError(e.message);
+        }
+    }
+
+    document.getElementById("searchBtn").addEventListener("click", doSearch);
+    searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") doSearch();
+    });
+
+    document.getElementById("logoutLink").addEventListener("click", (e) => {
+        e.preventDefault();
+        Auth.clear();
+        window.location.href = "login.html";
+    });
+</script>
+</body>
+</html>
