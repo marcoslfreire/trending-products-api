@@ -42,4 +42,8 @@ public class ProductServiceImpl implements ProductService {
         repository.persist(product);
         return product;
     }
+    @Override
+    public List<Product> listAll() {
+        return repository.listAllProducts();
+    }
 }

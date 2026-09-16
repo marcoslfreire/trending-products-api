@@ -18,4 +18,8 @@ public class ProductRepository implements PanacheRepository<Product> {
         return find("LOWER(name) LIKE LOWER(?1) OR LOWER(description) LIKE LOWER(?1)",
                 "%" + term + "%").list();
     }
+
+    public List<Product> listAllProducts() {
+        return listAll();
+    }
 }

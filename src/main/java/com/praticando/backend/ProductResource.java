@@ -53,4 +53,12 @@ public class ProductResource {
                 .entity(ProductResponse.from(product))
                 .build();
     }
+    @GET
+    @Path("/all")
+    @PermitAll
+    public List<ProductResponse> all() {
+        return productService.listAll().stream()
+                .map(ProductResponse::from)
+                .toList();
+    }
 }
