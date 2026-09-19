@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: trending-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: portfolio_db
+      MYSQL_USER: portfolio
+      MYSQL_PASSWORD: portfolio
+    ports:
+      - "3306:3306"
+    volumes:
+      - trending_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: .
+    container_name: trending-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/portfolio_db
+      DB_USER: portfolio
+      DB_PASSWORD: portfolio
+    ports:
+      - "8080:8080"
+      - "9000:9000"
+
+  frontend:
+    image: nginx:alpine
+    container_name: trending-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    ports:
+      - "8081:80"
+
+volumes:
+  trending_mysql_data:
